@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EtudiantController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'App\Http\Controllers\EtudiantController@index')
+    ->name('index');
+
+
+Route::get('/contact/{nom?}-{id?}', [EtudiantController::class, 'contact'])
+    ->whereNumber('id')
+    ->where('nom', '[a-zA-Z\-]+');
