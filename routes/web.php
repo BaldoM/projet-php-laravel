@@ -14,10 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\EtudiantController@index')
-    ->name('index');
+Route::get('/', function () {
+    return to_route('etudiants.index');
+});
 
-
-Route::get('/contact/{nom?}-{id?}', [EtudiantController::class, 'contact'])
-    ->whereNumber('id')
-    ->where('nom', '[a-zA-Z\-]+');
+Route::resource('etudiants', EtudiantController::class);
